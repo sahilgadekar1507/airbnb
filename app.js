@@ -106,17 +106,17 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
-// app.use((err, req, res, next) => {
-//     let { statusCode = 500, message = "Something Went Wrong!"} = err;
-//     // res.status(statusCode).send(message);
-//     res.status(statusCode).render("listings/error.ejs", { err });
-// });
-
-
 app.use((err, req, res, next) => {
-  console.error("FULL ERROR TRACE:\n", err.stack); 
-  res.status(500).send("Something broke!");
+    let { statusCode = 500, message = "Something Went Wrong!"} = err;
+    // res.status(statusCode).send(message);
+    res.status(statusCode).render("listings/error.ejs", { err });
 });
+
+
+// app.use((err, req, res, next) => {
+//   console.error("FULL ERROR TRACE:\n", err.stack); 
+//   res.status(500).send("Something broke!");
+// });
 
 app.listen(8080, () => {
   console.log("server is listening to the port 8080");
